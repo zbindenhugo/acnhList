@@ -10,7 +10,7 @@ export default function Fishes(){
     useEffect(() => {
         const fetchFishes = async () => {
             const fishesArray = [];
-            const datas = await fetch('http://acnhapi.com/v1/fish', {
+            const datas = await fetch('https://acnhapi.com/v1/fish', {
                 method: 'GET'
             });
             const json = await datas.json()

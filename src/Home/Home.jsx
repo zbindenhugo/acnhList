@@ -41,21 +41,21 @@ export default function Home() {
             const bugsArray = [];
             const seaArray = [];
 
-            var datas = await fetch('http://acnhapi.com/v1/fish', {method:'GET'});
+            var datas = await fetch('https://acnhapi.com/v1/fish', {method:'GET'});
             var json = await datas.json();
             for(var key in json){
                 fishesArray.push(json[key])
             }
             setFishes(fishesArray);
 
-            datas = await fetch('http://acnhapi.com/v1/bugs', {method:'GET'});
+            datas = await fetch('https://acnhapi.com/v1/bugs', {method:'GET'});
             json = await datas.json();
             for(var key in json){
                 bugsArray.push(json[key])
             }
             setBugs(bugsArray);
 
-            datas = await fetch('http://acnhapi.com/v1/sea', {method:'GET'});
+            datas = await fetch('https://acnhapi.com/v1/sea', {method:'GET'});
             json = await datas.json();
             for(var key in json){
                 seaArray.push(json[key])
