@@ -111,6 +111,8 @@ export default function Home() {
                         {
                             fishes.map((fish) => {
 
+                                const arrayLength = fish.availability['time-array'].length;
+
                                 return (
                                     <div key={fish.id} className="text-center hover:border-dashed hover:border-2 border-[#887B64] duration-75 h-32 transition-all rounded-full">
                                         <button>
@@ -120,7 +122,7 @@ export default function Home() {
                                                 alt="Fish Icon"
                                             />
                                             <h5 className="text-base font-medium leading-tight capitalize">{fish.name['name-EUfr']}</h5>
-                                            <p className="text-gray-500 text-sm">{frRarity[fish.availability.rarity]}</p>
+                                            <p className="text-gray-500 text-sm">{fish.availability.isAllDay ? 'Toute la journée' : `${fish.availability['time-array'][0]}h à ${fish.availability['time-array'][arrayLength - 1]}h` }</p>
                                         </button>
                                     </div>
                                 )
