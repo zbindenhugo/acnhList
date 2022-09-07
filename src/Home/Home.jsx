@@ -31,10 +31,10 @@ export default function Home() {
 
     const [tabIndex, setTabIndex] = useState(0);
 
-    const { islandLocation, chooseSouthernIsland } = useContext(IslandLocationContext);
-    chooseSouthernIsland()
+    const { islandLocation } = useContext(IslandLocationContext);
 
     useEffect(() => {
+
         const fetchDatas = async () => {
 
             const fishesArray = [];
@@ -44,27 +44,33 @@ export default function Home() {
             var datas = await fetch('https://acnhapi.com/v1/fish', {method:'GET'});
             var json = await datas.json();
             for(var key in json){
-                fishesArray.push(json[key])
+                if(json[key].availability[islandLocation].includes(new Date().getMonth() + 1)){ // Car getMonth commence à 0 ...
+                    fishesArray.push(json[key])
+                }
             }
             setFishes(fishesArray);
 
             datas = await fetch('https://acnhapi.com/v1/bugs', {method:'GET'});
             json = await datas.json();
             for(var key in json){
-                bugsArray.push(json[key])
+                if(json[key].availability[islandLocation].includes(new Date().getMonth() + 1)){ // Car getMonth commence à 0 ...
+                    bugsArray.push(json[key])
+                }
             }
             setBugs(bugsArray);
 
             datas = await fetch('https://acnhapi.com/v1/sea', {method:'GET'});
             json = await datas.json();
             for(var key in json){
-                seaArray.push(json[key])
+                if(json[key].availability[islandLocation].includes(new Date().getMonth() + 1)){ // Car getMonth commence à 0 ...
+                    seaArray.push(json[key])
+                }
             }
             setSeacreatures(seaArray);
         }
 
-        fetchDatas();
-    }, [])
+        fetchDatas(islandLocation);
+    }, [islandLocation])
 
     return(
         <div className="container mx-auto text-center">
@@ -101,25 +107,22 @@ export default function Home() {
 
                         }
                     </p>
-                    <div className='md:grid md:grid-cols-8 grid grid-cols-3 gap-2'>
+                    <div className='md:grid md:grid-cols-8 grid grid-cols-3 gap-2 items-center'>
                         {
                             fishes.map((fish) => {
 
                                 return (
-                                    fish.availability[islandLocation].includes(new Date(Date.now()).getMonth()) ?
-                                        <div key={fish.id} className="text-center hover:border-dashed hover:border border-[#887B64] duration-75 transition-all rounded-full h-36 align-middle">
-                                            <button>
-                                                <img
-                                                    src={fish.icon_uri}
-                                                    className="rounded-full w-16 mx-auto"
-                                                    alt="Fish Icon"
-                                                />
-                                                <h5 className="text-base font-medium leading-tight capitalize">{fish.name['name-EUfr']}</h5>
-                                                <p className="text-gray-500 text-sm">{frRarity[fish.availability.rarity]}</p>
-                                            </button>
-                                        </div>
-                                    :
-                                        null
+                                    <div key={fish.id} className="text-center hover:border-dashed hover:border-2 border-[#887B64] duration-75 h-32 transition-all rounded-full">
+                                        <button>
+                                            <img
+                                                src={fish.icon_uri}
+                                                className="rounded-full w-16 mx-auto"
+                                                alt="Fish Icon"
+                                            />
+                                            <h5 className="text-base font-medium leading-tight capitalize">{fish.name['name-EUfr']}</h5>
+                                            <p className="text-gray-500 text-sm">{frRarity[fish.availability.rarity]}</p>
+                                        </button>
+                                    </div>
                                 )
                             })
                         }
@@ -135,24 +138,21 @@ export default function Home() {
 
                         }
                     </p>
-                    <div className='md:grid md:grid-cols-10 grid grid-cols-3 gap-2'>
+                    <div className='md:grid md:grid-cols-8 grid grid-cols-3 gap-2'>
                         {
                             bugs.map((bug) => {
                                 return (
-                                    bug.availability[islandLocation].includes(new Date(Date.now()).getMonth()) ?
-                                        <div key={bug.id} className="text-center hover:border-2 hover:border-dashed border-[#887B64] duration-75 transition-all rounded-md">
-                                            <button>
-                                                <img
-                                                    src={bug.icon_uri}
-                                                    className="rounded-full w-16 mx-auto"
-                                                    alt="Fish Icon"
-                                                />
-                                                <h5 className="text-base font-medium leading-tight mb-2 capitalize">{bug.name['name-EUfr']}</h5>
-                                                <p className="text-gray-500 text-sm">{frRarity[bug.availability.rarity]}</p>
-                                            </button>
+                                    <div key={bug.id} className="text-center hover:border-dashed hover:border-2 border-[#887B64] duration-75 transition-all rounded-full h-36 align-middle">
+                                        <button>
+                                            <img
+                                                src={bug.icon_uri}
+                                                className="rounded-full w-16 mx-auto"
+                                                alt="Fish Icon"
+                                            />
+                                            <h5 className="text-base font-medium leading-tight capitalize">{bug.name['name-EUfr']}</h5>
+                                            <p className="text-gray-500 text-sm">{frRarity[bug.availability.rarity]}</p>
+                                        </button>
                                     </div>
-                                    :
-                                        null
                                 )
                             })
                         }
@@ -168,12 +168,12 @@ export default function Home() {
 
                         }
                     </p>
-                    <div className='md:grid md:grid-cols-10 grid grid-cols-3 gap-2'>
+                    <div className='md:grid md:grid-cols-8 grid grid-cols-3 gap-2'>
                         {
                             seacreatures.map((sea) => {
                                 return (
-                                    sea.availability[islandLocation].includes(new Date(Date.now()).getMonth()) ?
-                                        <div key={sea.id} className="text-center hover:border-2 hover:border-dashed border-[#887B64] duration-75 transition-all rounded-md">
+                                    <div key={sea.id} className="text-center hover:border-dashed hover:border-2 border-[#887B64] duration-75 transition-all rounded-full h-36 align-middle">
+                                        <button>
                                             <img
                                                 src={sea.icon_uri}
                                                 className="rounded-full w-16 mx-auto"
@@ -181,9 +181,8 @@ export default function Home() {
                                             />
                                             <h5 className="text-base font-medium leading-tight mb-2 capitalize">{sea.name['name-EUfr']}</h5>
                                             <p className="text-gray-500 text-sm">{frSpeed[sea.speed]}</p>
+                                        </button>
                                     </div>
-                                    :
-                                        null
                                 )
                             })
                         }

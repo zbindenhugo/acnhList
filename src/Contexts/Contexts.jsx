@@ -3,7 +3,7 @@ import React, { useState } from "react";
 export const IslandLocationContext = React.createContext();
 
 export const IslandLocationProvider = ({children}) => {
-    const [islandLocation, setIslandLocation] = useState("");
+    const [islandLocation, setIslandLocation] = useState("month-array-northern");
 
     const chooseNorthernIsland = () => {
         setIslandLocation('month-array-northern');

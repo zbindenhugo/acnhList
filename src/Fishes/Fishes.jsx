@@ -5,7 +5,8 @@ export default function Fishes(){
     
     const [fishes, setFishes] = useState([]);
 
-    const { islandLocation, chooseSouthernIsland } = useContext(IslandLocationContext);
+    const { islandLocation } = useContext(IslandLocationContext);
+
 
     useEffect(() => {
         const fetchFishes = async () => {
@@ -23,8 +24,6 @@ export default function Fishes(){
         }
 
         fetchFishes();
-        
-        chooseSouthernIsland();
     }, [])
 
 
