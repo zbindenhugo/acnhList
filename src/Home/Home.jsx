@@ -143,6 +143,9 @@ export default function Home() {
                     <div className='md:grid md:grid-cols-8 grid grid-cols-3 gap-2'>
                         {
                             bugs.map((bug) => {
+
+                                const arrayLength = bug.availability['time-array'].length;
+
                                 return (
                                     <div key={bug.id} className="text-center hover:border-dashed hover:border-2 border-[#887B64] duration-75 transition-all rounded-full h-36 align-middle">
                                         <button>
@@ -152,7 +155,7 @@ export default function Home() {
                                                 alt="Fish Icon"
                                             />
                                             <h5 className="text-base font-medium leading-tight capitalize">{bug.name['name-EUfr']}</h5>
-                                            <p className="text-gray-500 text-sm">{frRarity[bug.availability.rarity]}</p>
+                                            <p className="text-gray-500 text-sm">{bug.availability.isAllDay ? 'Toute la journée' : `${bug.availability['time-array'][0]}h à ${bug.availability['time-array'][arrayLength - 1]}h` }</p>
                                         </button>
                                     </div>
                                 )

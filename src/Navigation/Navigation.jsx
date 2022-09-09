@@ -1,13 +1,13 @@
 import { useContext, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import Cookies from 'universal-cookie';
+//import Cookies from 'universal-cookie';
 
 import { IslandLocationContext } from '../Contexts/Contexts';
 import ConnectModal from '../modals/ConnectModal';
 
 export default function Navigation(){
 
-    const cookies = new Cookies();
+    /*const cookies = new Cookies();*/
 
     const { chooseNorthernIsland, chooseSouthernIsland } = useContext(IslandLocationContext);
 
@@ -115,12 +115,14 @@ export default function Navigation(){
                         </label>
 
                         {
+                            /* [TODO] - Voir quand une base en ligne sera dispo
                             cookies.get('user') ? 
                                 <p>Bonjour {cookies.get('user').firstname} {cookies.get('user').lastname}</p>
                             :
                                 <button className="block px-5 py-2.5 text-sm font-medium text-white bg-[#01A6BF] hover:bg-teal-700 transition rounded-md" onClick={handleConnectClick}>
                                     Se connecter
                                 </button>
+                            */
                         }
                     </div>
                 </div>
