@@ -81,7 +81,7 @@ export default function Fishes(){
                         }           
 
                         return(
-                            <div key={fish.id} className="border border-black p-2" onClick={() => console.log('')}>
+                            <div key={fish.id} className="border border-black p-2" onClick={() => console.log('TODO AFFICHAGE MODALE')}>
                                 <div className="text-center capitalize hover:border hover:border-x-2 hover:border-y-2 hover:border-dashed hover:border-slate-500 transition-all duration-150">
                                     {fishHeader()}
                                     <img src={fish.icon_uri} alt='fish icon' className={setFishVisibility()} />

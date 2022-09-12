@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { IslandLocationContext } from '../Contexts/Contexts';
+import CritterModal from '../modals/CritterModal';
 
 import './Home.css'
 export default function Home() {
@@ -10,6 +11,9 @@ export default function Home() {
     const [fishes, setFishes] = useState([]);
     const [bugs, setBugs] = useState([]);
     const [seacreatures, setSeacreatures] = useState([]);
+
+    const [actualCritter, setActualCritter] = useState()
+    const [actualCritterType, setActualCritterType] = useState('')
 
     const months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin','Juillet', 'Août', 'Septembre', 'Octobre','Novembre', 'Décembre']
     
@@ -30,8 +34,15 @@ export default function Home() {
     }
 
     const [tabIndex, setTabIndex] = useState(0);
+    const [showCritterModal, toggleShowCritterModal] = useState(false);
 
     const { islandLocation } = useContext(IslandLocationContext);
+
+    const handleShowCritterModal = async (critter, typeCritter) => {
+        await setActualCritter(critter);
+        await setActualCritterType(typeCritter);
+        await toggleShowCritterModal(!showCritterModal);
+    }
 
     useEffect(() => {
 
@@ -114,8 +125,7 @@ export default function Home() {
                                 const arrayLength = fish.availability['time-array'].length;
 
                                 return (
-                                    <div key={fish.id} className="text-center hover:border-dashed hover:border-2 border-[#887B64] duration-75 h-32 transition-all rounded-full">
-                                        <button>
+                                    <div key={fish.id} onClick={() => handleShowCritterModal(fish, 'fish')} className="cursor-pointer text-center hover:border-dashed hover:border-2 border-[#887B64] duration-75 h-32 transition-all rounded-full">
                                             <img
                                                 src={fish.icon_uri}
                                                 className="rounded-full w-16 mx-auto"
@@ -123,7 +133,6 @@ export default function Home() {
                                             />
                                             <h5 className="text-base font-medium leading-tight capitalize">{fish.name['name-EUfr']}</h5>
                                             <p className="text-gray-500 text-sm">{fish.availability.isAllDay ? 'Toute la journée' : `${fish.availability['time-array'][0]}h à ${fish.availability['time-array'][arrayLength - 1]}h` }</p>
-                                        </button>
                                     </div>
                                 )
                             })
@@ -147,8 +156,7 @@ export default function Home() {
                                 const arrayLength = bug.availability['time-array'].length;
 
                                 return (
-                                    <div key={bug.id} className="text-center hover:border-dashed hover:border-2 border-[#887B64] duration-75 transition-all rounded-full h-36 align-middle">
-                                        <button>
+                                    <div key={bug.id} onClick={() => handleShowCritterModal(bug, 'bug')} className="cursor-pointer text-center hover:border-dashed hover:border-2 border-[#887B64] duration-75 transition-all rounded-full h-36 align-middle">
                                             <img
                                                 src={bug.icon_uri}
                                                 className="rounded-full w-16 mx-auto"
@@ -156,7 +164,6 @@ export default function Home() {
                                             />
                                             <h5 className="text-base font-medium leading-tight capitalize">{bug.name['name-EUfr']}</h5>
                                             <p className="text-gray-500 text-sm">{bug.availability.isAllDay ? 'Toute la journée' : `${bug.availability['time-array'][0]}h à ${bug.availability['time-array'][arrayLength - 1]}h` }</p>
-                                        </button>
                                     </div>
                                 )
                             })
@@ -177,8 +184,7 @@ export default function Home() {
                         {
                             seacreatures.map((sea) => {
                                 return (
-                                    <div key={sea.id} className="text-center hover:border-dashed hover:border-2 border-[#887B64] duration-75 transition-all rounded-full h-36 align-middle">
-                                        <button>
+                                    <div key={sea.id} onClick={() => handleShowCritterModal(sea, 'sea')} className="cursor-pointer text-center hover:border-dashed hover:border-2 border-[#887B64] duration-75 transition-all rounded-full h-36 align-middle">
                                             <img
                                                 src={sea.icon_uri}
                                                 className="rounded-full w-16 mx-auto"
@@ -186,7 +192,6 @@ export default function Home() {
                                             />
                                             <h5 className="text-base font-medium leading-tight mb-2 capitalize">{sea.name['name-EUfr']}</h5>
                                             <p className="text-gray-500 text-sm">{frSpeed[sea.speed]}</p>
-                                        </button>
                                     </div>
                                 )
                             })
@@ -194,6 +199,7 @@ export default function Home() {
                     </div>
                 </TabPanel>
             </Tabs>
+            <CritterModal showCritterModal={showCritterModal} handleShowCritterModal={handleShowCritterModal} critter={actualCritter} typeCritter={actualCritterType} />
         </div>
     )
 }
