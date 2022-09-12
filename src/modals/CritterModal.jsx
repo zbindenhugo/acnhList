@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { IslandLocationContext } from "../Contexts/Contexts";
 
@@ -79,14 +78,14 @@ export default function CritterModal({showCritterModal, handleShowCritterModal, 
                             {critter?.availability.isAllYear ? 
                                 "Toute l'année" 
                             : 
-                                mois[critter?.availability[islandLocation][0]] + ' à ' + mois[critter?.availability[islandLocation][critter?.availability[islandLocation].length - 1]]
+                                'De ' + mois[critter?.availability[islandLocation][0]] + ' à ' + mois[critter?.availability[islandLocation][critter?.availability[islandLocation].length - 1]]
                             }
                         </p>
                         <p className='mt-1'>
                             {critter?.availability.isAllDay ? 
                                 "Toute la journée" 
                             : 
-                                critter?.availability['time-array'][0] + 'h à ' + critter?.availability['time-array'][critter?.availability['time-array'].length - 1] + 'h'
+                                'De ' + critter?.availability['time-array'][0] + 'h à ' + critter?.availability['time-array'][critter?.availability['time-array'].length - 1] + 'h'
                             }
                         </p>
                     </div>
@@ -123,6 +122,9 @@ export default function CritterModal({showCritterModal, handleShowCritterModal, 
                                     :
                                     critter?.price + ' clochettes'
                             }
+                        </p>
+                        <p>
+                            <span className="bg-[#dad888] rounded-md p-1 text-lg">Prix :</span> {' '}
                         </p>
                     </div>
                 </div>

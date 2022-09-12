@@ -16,13 +16,6 @@ export default function Home() {
     const [actualCritterType, setActualCritterType] = useState('')
 
     const months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin','Juillet', 'Août', 'Septembre', 'Octobre','Novembre', 'Décembre']
-    
-    const frRarity = {
-        "Common" : "Commun",
-        "Uncommon" : "Peu Commun",
-        "Rare" : "Rare",
-        "Ultra-rare" : "Ultra rare"
-    }
 
     const frSpeed = {
         "Stationary" : "Immobile",
@@ -54,7 +47,7 @@ export default function Home() {
 
             var datas = await fetch('https://acnhapi.com/v1/fish', {method:'GET'});
             var json = await datas.json();
-            for(var key in json){
+            for(const key in json){
                 if(json[key].availability[islandLocation].includes(new Date().getMonth() + 1)){ // Car getMonth commence à 0 ...
                     fishesArray.push(json[key])
                 }
@@ -63,7 +56,7 @@ export default function Home() {
 
             datas = await fetch('https://acnhapi.com/v1/bugs', {method:'GET'});
             json = await datas.json();
-            for(var key in json){
+            for(const key in json){
                 if(json[key].availability[islandLocation].includes(new Date().getMonth() + 1)){ // Car getMonth commence à 0 ...
                     bugsArray.push(json[key])
                 }
@@ -72,7 +65,7 @@ export default function Home() {
 
             datas = await fetch('https://acnhapi.com/v1/sea', {method:'GET'});
             json = await datas.json();
-            for(var key in json){
+            for(const key in json){
                 if(json[key].availability[islandLocation].includes(new Date().getMonth() + 1)){ // Car getMonth commence à 0 ...
                     seaArray.push(json[key])
                 }

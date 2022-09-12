@@ -1,12 +1,17 @@
-import { useContext, useEffect, useState } from "react";
-import { IslandLocationContext } from "../Contexts/Contexts";
+import { useEffect, useState } from "react";
+import CritterModal from "../modals/CritterModal";
 
 export default function Fishes(){
     
     const [fishes, setFishes] = useState([]);
+    
+    const [actualCritter, setActualCritter] = useState()
+    const [showCritterModal, toggleShowCritterModal] = useState(false);
 
-    const { islandLocation } = useContext(IslandLocationContext);
-
+    const handleShowCritterModal = async (critter) => {
+        await setActualCritter(critter);
+        await toggleShowCritterModal(!showCritterModal);
+    }
 
     useEffect(() => {
         const fetchFishes = async () => {
@@ -49,48 +54,40 @@ export default function Fishes(){
                     </ul>
                 </div>
             </div>
-            <div className="text-center mx-auto md:grid md:grid-cols-8 grid grid-cols-3 mt-10">
+            <div className="text-center mx-auto md:grid md:grid-cols-8 grid grid-cols-3 mt-10 gap-2">
                 {
                     fishes.map((fish) => {
-
-                        const fishHeader = () => {
-                            switch(fish.availability.rarity){
-                                case 'Common' :
-                                    return <div className="text-sm"> {fish.name['name-EUfr'] + ' '}<i className="fa fa-star text-gray-500 text-xl float-right" title="Commun"/></div>
-                                case 'Uncommon' :
-                                    return <div> {fish.name['name-EUfr'] + ' '}<i className="fa fa-star text-blue-400 text-xl float-right" title="Peu commun"/></div>
-                                case 'Rare' :
-                                    return <div> {fish.name['name-EUfr'] + ' '}<i className="fa fa-star text-purple-400 text-xl float-right" title="Rare"/></div>
-                                case 'Ultra-rare' :
-                                    return <div> {fish.name['name-EUfr'] + ' '}<i className="fa fa-star text-yellow-500 text-xl float-right" title="Ultra rare"/></div>
-                                default :
-                                    break;
-                            }
-                        }
-
-                        const setFishVisibility = () => {
-                            return (
-                                fish.availability.isAllYear ?
-                                    "w-[64px] h-[64px] mx-auto"
-                                :
-                                    fish.availability[islandLocation].includes(new Date(Date.now()).getMonth()) ? 
-                                        "w-[64px] h-[64px] mx-auto"
-                                    :
-                                        "w-[64px] h-[64px] mx-auto blur-sm"
-                            )
-                        }           
-
                         return(
-                            <div key={fish.id} className="border border-black p-2" onClick={() => console.log('TODO AFFICHAGE MODALE')}>
-                                <div className="text-center capitalize hover:border hover:border-x-2 hover:border-y-2 hover:border-dashed hover:border-slate-500 transition-all duration-150">
-                                    {fishHeader()}
-                                    <img src={fish.icon_uri} alt='fish icon' className={setFishVisibility()} />
-                                </div>
-                            </div> 
+                            <div key={fish.id} onClick={() => handleShowCritterModal(fish)} className="cursor-pointer text-center hover:border-dashed hover:border-2 border-[#887B64] duration-75 h-32 transition-all rounded-full">
+                                <img
+                                    src={fish.icon_uri}
+                                    className="rounded-full w-16 mx-auto"
+                                    alt="Fish Icon"
+                                />
+                                <h5 className="text-base font-medium leading-tight capitalize">{fish.name['name-EUfr']}</h5>
+                                <p className="text-gray-500 text-sm">{fish.availability.isAllDay ? 'Toute la journée' : `${fish.availability['time-array'][0]}h à ${fish.availability['time-array'][fish.availability['time-array'].length - 1]}h` }</p>
+                                {
+                                    () => {
+                                        switch(fish.availability.rarity){
+                                            case 'Common' :
+                                                return(<i className="fa fa-star text-gray-500 text-xl" title="Commun"/>)
+                                            case 'Uncommon' :
+                                                return(<i className="fa fa-star text-blue-400 text-xl" title="Peu commun"/>)
+                                            case 'Rare' : 
+                                                return(<i className="fa fa-star text-purple-400 text-xl" title="Rare"/>)
+                                            case 'Ultra-rare' :
+                                                return(<i className="fa fa-star text-yellow-500 text-xl" title="Ultra rare"/>)
+                                            default :
+                                                return(null)
+                                        }
+                                    }
+                                }
+                            </div>
                         )
                     })
                 } 
             </div>
+            <CritterModal showCritterModal={showCritterModal} handleShowCritterModal={handleShowCritterModal} critter={actualCritter} typeCritter={'fish'} />
         </div>
     )
 }
