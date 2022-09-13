@@ -187,7 +187,7 @@ export default function Home() {
                                                 className="rounded-full w-16 mx-auto"
                                                 alt="Fish Icon"
                                             />
-                                            <h5 className="text-base font-medium leading-tight mb-2 capitalize">{sea.name['name-EUfr']}</h5>
+                                            <h5 className="text-base font-medium leading-tight mb-2 capitalize">{sea?.name['name-EUfr']}</h5>
                                             <p className="text-gray-500 text-sm">{frSpeed[sea.speed]}</p>
                                     </div>
                                 )

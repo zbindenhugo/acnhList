@@ -1,9 +1,10 @@
 import './App.css';
 import Navigation from './Navigation/Navigation';
 import {Routes, Route} from 'react-router-dom'
-import Fishes from './Fishes/Fishes';
+import Fishes from './Critters/Fishes';
 import { IslandLocationProvider } from './Contexts/Contexts';
 import Home from './Home/Home';
+import Bugs from './Critters/Bugs';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/fishes' element={<Fishes />} />
         <Route path='/seacreatures' element={<Home />} />
-        <Route path='/bugs' element={<Fishes />} />
+        <Route path='/bugs' element={<Bugs />} />
         <Route 
           path='*'
           element={

@@ -124,7 +124,7 @@ export default function CritterModal({showCritterModal, handleShowCritterModal, 
                             }
                         </p>
                         <p className="mt-2">
-                            <span className="bg-[#dad888] rounded-md p-1 text-lg">Plus d'information :</span> {' '} <a className="text-xl" href={`https://animalcrossing.fandom.com/wiki/${critter?.['file-name']}`}>ICI</a>
+                            <span className="bg-[#dad888] rounded-md p-1 text-lg">Plus d'information :</span> {' '} <a className="text-xl" href={`https://animalcrossing.fandom.com/wiki/${encodeURI(critter?.['file-name'])}`}>ICI</a>
                         </p>
                     </div>
                 </div>
