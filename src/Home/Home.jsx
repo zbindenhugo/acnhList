@@ -37,6 +37,10 @@ export default function Home() {
         await toggleShowCritterModal(!showCritterModal);
     }
 
+    const handleShowCritterModalSimple = () => {
+        toggleShowCritterModal(!showCritterModal)
+    }
+
     useEffect(() => {
 
         const fetchDatas = async () => {
@@ -192,7 +196,7 @@ export default function Home() {
                     </div>
                 </TabPanel>
             </Tabs>
-            <CritterModal showCritterModal={showCritterModal} handleShowCritterModal={handleShowCritterModal} critter={actualCritter} typeCritter={actualCritterType} />
+            <CritterModal showCritterModal={showCritterModal} handleShowCritterModal={handleShowCritterModalSimple} critter={actualCritter} typeCritter={actualCritterType} />
         </div>
     )
 }

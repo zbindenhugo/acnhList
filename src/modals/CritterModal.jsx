@@ -63,7 +63,7 @@ export default function CritterModal({showCritterModal, handleShowCritterModal, 
         <Modal show={showCritterModal} onHide={handleShowCritterModal}>
             <div className="rounded-lg bg-[#FAF4DE] container text-center">
                 <div className="modal-title text-center mt-4 capitalize text-3xl">
-                    {critter?.name['name-EUfr']}
+                    {critter?.name['name-EUfr']} <span className="float-right text-xl"><button onClick={handleShowCritterModal}><i className="fa fa-times bg-[#E6E1CF] rounded-lg p-1" /></button></span>
                 </div>
                 <div>
                     <img src={critter?.image_uri} className='mr-auto ml-auto' alt="Critter big" />
@@ -115,16 +115,16 @@ export default function CritterModal({showCritterModal, handleShowCritterModal, 
                             <span className="bg-[#dad888] rounded-md p-1 text-lg">Prix :</span> {' '}
                             {
                                 typeCritter === 'fish' ? 
-                                    critter?.price + ' clochettes (' + critter?.['price-cj'] + ' si vendu à C.J)'
+                                    critter?.price + ' clochettes (' + critter?.['price-cj'] + ' si vendu à Pollux)'
                                 :
                                     typeCritter === 'bug' ? 
-                                        critter?.price + ' clochettes (' + critter?.['price-flick'] + ' si vendu à Flick)'
+                                        critter?.price + ' clochettes (' + critter?.['price-flick'] + ' si vendu à Djason)'
                                     :
                                     critter?.price + ' clochettes'
                             }
                         </p>
-                        <p>
-                            <span className="bg-[#dad888] rounded-md p-1 text-lg">Prix :</span> {' '}
+                        <p className="mt-2">
+                            <span className="bg-[#dad888] rounded-md p-1 text-lg">Plus d'information :</span> {' '} <a className="text-xl" href={`https://animalcrossing.fandom.com/wiki/${critter?.['file-name']}`}>ICI</a>
                         </p>
                     </div>
                 </div>
