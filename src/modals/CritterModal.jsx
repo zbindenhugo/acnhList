@@ -57,6 +57,7 @@ export default function CritterModal({showCritterModal, handleShowCritterModal, 
         'Very fast' : 'Très rapide'
     }
 
+    
     const { islandLocation } = useContext(IslandLocationContext);
 
     return(
@@ -70,7 +71,7 @@ export default function CritterModal({showCritterModal, handleShowCritterModal, 
                 </div>
                 <hr />
                 <div className="grid grid-cols-2 mt-3 mb-3 p-2">
-                    <div className="critter-infos">
+                    <div className='critter-info'>
                         <h1 className="text-xl italic text-center underline">
                             Disponibilité 
                         </h1>
@@ -98,7 +99,7 @@ export default function CritterModal({showCritterModal, handleShowCritterModal, 
                                 location[critter?.availability.location]
                             }
                         </p>
-                        <p className="text-slate-500 italic text-sm">
+                        <p className='text-slate-500 italic text-sm'>
                         {
                             typeCritter === 'fish' ? <span>Ombre : { shadow[critter?.shadow] }</span>  : typeCritter === 'sea' ? <span>Vitesse : { speed[critter?.speed] }</span> : null
                         }

@@ -81,7 +81,7 @@ export default function Home() {
     }, [islandLocation])
 
     return(
-        <div className="container mx-auto text-center">
+        <div className="container mx-auto text-center mb-3">
             <div className="text-center text-6xl mt-10">
                 AC Pedia
             </div>

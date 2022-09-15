@@ -5,6 +5,8 @@ import Fishes from './Critters/Fishes';
 import { IslandLocationProvider } from './Contexts/Contexts';
 import Home from './Home/Home';
 import Bugs from './Critters/Bugs';
+import Sea from './Critters/Sea';
+import Fossils from './Critters/Fossils';
 
 function App() {
   return (
@@ -13,8 +15,9 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/fishes' element={<Fishes />} />
-        <Route path='/seacreatures' element={<Home />} />
+        <Route path='/seacreatures' element={<Sea />} />
         <Route path='/bugs' element={<Bugs />} />
+        <Route path='/fossils' element={<Fossils />} />
         <Route 
           path='*'
           element={
